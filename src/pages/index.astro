@@ -25,7 +25,6 @@ import Card from '../components/Card.astro';
 						<label for="content--height">Alto</label>
 						<input type="number" min="150" id="content--height" value="150"/>
 					</div>
-
 				</div>
 
 				<button id="generate">Generar</button>
@@ -126,5 +125,10 @@ import Card from '../components/Card.astro';
 	.qr-result {
 		display: flex;
 		justify-content: center;
+	}
+
+	.qr-result img {
+		width: 100%;
+		height: auto;
 	}
 </style>
