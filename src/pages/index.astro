@@ -12,30 +12,39 @@ import Card from '../components/Card.astro';
 
 		<div class="link-card-grid">
 			<div class="element-grid">
-				<div class="element-grid__form">
-					<div class="content--input">
-						<label for="content">Enlace o contenido</label>
-						<input type="text" id="content" placeholder="https://example.org" value="https://encuesta.com"/>
+				<div class="element-grid__form-preview">
+					<div class="element-grid__form">
+						<div class="content--inputs">
+							<label for="content">Enlace o contenido</label>
+							<input type="text" id="content" placeholder="https://example.org" value="https://encuesta.com"/>
+						</div>
+						<div class="content--inputs">
+							<label for="content--width">
+								Ancho
+								<div class="tooltip">i
+									<span class="tooltiptext">Max: 1000</span>
+							  	</div>
+							</label>
+							<input type="number" min="10" max="1000" id="content--width" value="150" pattern="[0-9]"/>
+						</div>
+						<div class="content--inputs">
+							<label for="content--height">
+								Alto
+								<div class="tooltip">i
+									<span class="tooltiptext">Max: 1000</span>
+							  	</div>
+							</label>
+							<input type="number" min="10" max="1000" id="content--height" value="150" pattern="[0-9]"/>
+						</div>
 					</div>
-					<div class="content--width">
-						<label for="content--width">Ancho</label>
-						<input type="number" min="150" id="content--width" value="150"/>
-					</div>
-					<div class="content--height">
-						<label for="content--height">Alto</label>
-						<input type="number" min="150" id="content--height" value="150"/>
+
+					<div class="qr-result">
+						<img src="" alt="QR Code" />
 					</div>
 				</div>
 
 				<button id="generate">Generar</button>
-
-				<div class="qr-result">
-					<img src="" alt="QR Code" />
-				</div>
 			</div>
-			<!-- <div class="element-grid">
-				Formulario para generar un código QR
-			</div> -->
 		</div>
 	</main>
 </Layout>
@@ -56,6 +65,8 @@ import Card from '../components/Card.astro';
 		if (str_content) {
 			qrResult.src = `${url_api}?size=${str_width}x${str_height}&data=${str_content}`;
 			console.log(qrResult.src)
+
+			qrResult.style.visibility = 'visible';
 		}
 	});
 </script>
@@ -122,13 +133,68 @@ import Card from '../components/Card.astro';
 		gap: 1rem;
 	}
 
+	.element-grid__form-preview {
+		display: flex;
+		justify-content: space-between;
+		align-items: stretch;
+		gap: 2rem;
+	}
+
 	.qr-result {
 		display: flex;
 		justify-content: center;
+		flex: 1;
 	}
 
 	.qr-result img {
-		width: 100%;
-		height: auto;
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
+	.element-grid__form {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	.content--inputs {
+		margin-top: 0.5em;
+		display: flex;
+		flex-direction: column;
+	}
+
+	/* Tooltip */
+	/* Estilo para el contenedor del tooltip */
+	.tooltip {
+		position: relative;
+		display: inline-block;
+		border-bottom: 1px dotted black; /* Si quieres un subrayado */
+	}
+
+	/* Estilo para el texto del tooltip */
+	.tooltip .tooltiptext {
+		visibility: hidden;
+		width: 120px;
+		background-color: #555;
+		color: #fff;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
+
+		/* Posicionamiento */
+		position: absolute;
+		z-index: 1;
+		bottom: 100%; /* Coloca el tooltip encima del texto */
+		left: 50%;
+		margin-left: -60px; /* Centra el tooltip */
+
+		/* Efecto de desvanecimiento */
+		opacity: 0;
+		transition: opacity 0.3s;
+	}
+
+	/* Muestra el tooltip cuando se pasa el cursor sobre el contenedor del tooltip */
+	.tooltip:hover .tooltiptext {
+		visibility: visible;
+		opacity: 1;
 	}
 </style>
