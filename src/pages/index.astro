@@ -63,7 +63,8 @@ import Card from '../components/Card.astro';
 		const str_height = content_height.value;
 
 		if (str_content) {
-			qrResult.src = `${url_api}?size=${str_width}x${str_height}&data=${str_content}`;
+			const encodedContent = encodeURIComponent(str_content);
+			qrResult.src = `${url_api}?size=${str_width}x${str_height}&data=${encodedContent}`;
 			console.log(qrResult.src)
 
 			qrResult.style.visibility = 'visible';
