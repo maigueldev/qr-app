@@ -16,4 +16,10 @@ if (isProduction) {
 }
 
 // https://astro.build/config
+CONFIG = {
+    ...CONFIG,
+    image: {
+        domains: ["astro.build"],
+    },
+}
 export default defineConfig(CONFIG);
