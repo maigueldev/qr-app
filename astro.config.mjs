@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 
 const SERVER_PORT = 3000;
 const LOCALHOST_URL = `http://localhost:${SERVER_PORT}`;
@@ -19,7 +19,7 @@ if (isProduction) {
 CONFIG = {
     ...CONFIG,
     image: {
-        domains: ["astro.build"],
+        service: passthroughImageService(),
     },
 }
 export default defineConfig(CONFIG);
