@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import localGenerate from '../img/generate.png';
+
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 ---
@@ -39,7 +42,7 @@ import Card from '../components/Card.astro';
 					</div>
 
 					<div class="qr-result">
-						<img src="" alt="QR Code" />
+						<Image src={localGenerate} alt="QR Code" />
 					</div>
 				</div>
 
@@ -65,7 +68,6 @@ import Card from '../components/Card.astro';
 		if (str_content) {
 			const encodedContent = encodeURIComponent(str_content);
 			qrResult.src = `${url_api}?size=${str_width}x${str_height}&data=${encodedContent}`;
-			console.log(qrResult.src)
 
 			qrResult.style.visibility = 'visible';
 		}
@@ -197,5 +199,18 @@ import Card from '../components/Card.astro';
 	.tooltip:hover .tooltiptext {
 		visibility: visible;
 		opacity: 1;
+	}
+
+	#generate {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		max-width: 350px;
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		padding: 0.5rem;
+		border-radius: 8px;
+		color: white
 	}
 </style>
